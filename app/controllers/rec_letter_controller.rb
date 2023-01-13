@@ -1,0 +1,66 @@
+class RecLetterController < ApplicationController
+  before_action :set_rec_letters, only: [:show, :edit, :update, :destroy]
+
+  # GET /rec_letters
+  # GET /rec_letters.json
+  def index
+    @rec_letters = RecLetter.all.order(due_date: :asc)
+    # render json: @rec_letters
+  end
+
+  # GET /rec_letter/1
+  # GET /rec_letter/1.json
+  def show
+    if @rec_letter
+      render json: @rec_letter
+    else
+      render json: @rec_letter.errors
+    end
+  end
+
+  # GET /rec_letters/new
+  def new
+    @rec_letter = RecLetter.new
+  end
+
+  # GET /rec_letters/1/edit
+  def edit
+  end
+
+  # POST /rec_letters
+  # POST /rec_letters.json
+  def create
+    @rec_letter = RecLetter.new(rec_letter_params)
+    if @rec_letter.save
+      render json: @rec_letter
+    else
+      render json: @rec_letter.errors
+    end
+  end
+
+  # PATCH/PUT /rec_letters/1
+  # PATCH/PUT /rec_letters/1.json
+  def update
+  end
+
+  # DELETE /rec_letters/1
+  # DELETE /rec_letters/1.json
+  def destroy
+    @rec_letter.destroy
+
+    render json: { notice: 'RecLetter was successfully removed.' }
+  end
+
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_rec_letters
+      @rec_letters = RecLetter.find(params[:id])
+    end
+
+    # Only allow a list of trusted parameters through.
+    def rec_letters_params
+      params.permit(:due_date, :school, :owner, :assignee)
+    end
+
+end
