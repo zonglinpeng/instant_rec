@@ -66,6 +66,6 @@ yarn add antd react-router-dom
 ### PostgreSQL
 Populate the database with dummy data entries
 ```bash
-rake bootstrap.rake
+./bin/rails db:seed
 ```
 

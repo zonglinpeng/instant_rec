@@ -10,15 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_12_224842) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_13_163002) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "rec_letters", force: :cascade do |t|
+  create_table "professors", id: false, force: :cascade do |t|
+    t.string "professor_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "rec_letters", id: false, force: :cascade do |t|
+    t.uuid "rec_letter_id", default: -> { "gen_random_uuid()" }
     t.datetime "due_date"
-    t.string "school"
-    t.string "owner"
-    t.string "assignee"
+    t.string "school_name"
+    t.string "professor_name"
+    t.string "student_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["professor_name"], name: "index_rec_letters_on_professor_name_id"
+    t.index ["school_name"], name: "index_rec_letters_on_school_name_id"
+    t.index ["student_name"], name: "index_rec_letters_on_student_name_id"
+  end
+
+  create_table "schools", id: false, force: :cascade do |t|
+    t.string "school_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "students", id: false, force: :cascade do |t|
+    t.string "student_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

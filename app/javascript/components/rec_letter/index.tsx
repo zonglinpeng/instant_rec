@@ -11,8 +11,7 @@ export default function RecLetter() {
         console.log(qs)
         setRecLetter(qs)
     })()
-
-}, [recLetterAPI]);
+  }, [recLetterAPI]);
 
   return (
     <>
