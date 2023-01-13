@@ -6,22 +6,22 @@ import Box from '@mui/material/Box';
 import './index.css'
 import { Link } from "react-router-dom";
 import Avatar from '@mui/material/Avatar';
-import api from '../../api/litcode';
+// import api from '../../api/litcode';
 import { useEffect, useState } from 'react';
-import { UserProfile } from '../../api/litcode/model/UserProfile';
+import React from 'react';
 
 export default function Header() {
-    const userAPI = api.user()
-    const [profile, setProfile] = useState<UserProfile | null>(null)
+    // const userAPI = api.user()
+    // const [profile, setProfile] = useState<UserProfile | null>(null)
 
-    useEffect(() => {
-        (
-            async () => {
-                const rst = await userAPI.profile()
-                setProfile(rst)
-            }
-        )()
-    }, [userAPI])
+    // useEffect(() => {
+    //     (
+    //         async () => {
+    //             const rst = await userAPI.profile()
+    //             setProfile(rst)
+    //         }
+    //     )()
+    // }, [userAPI])
 
     return (
         <Box id="header" >
@@ -29,7 +29,7 @@ export default function Header() {
                 <Toolbar>
                     <Button id="home" color="inherit" component={Link} to={'/'} >
                         <Typography id="home" variant="h6" color="inherit" component="div" >
-                            LITCODE
+                            INSTANTREC
                         </Typography>
                     </Button>
                     <Box sx={{ flexGrow: 1 }}></Box>
@@ -37,11 +37,11 @@ export default function Header() {
                     <Button color="inherit" component={Link} to={'/profile'}>Profile</Button>
                     <Button color="inherit" component={Link} to={'/tag-questions'}>Tag</Button>
 
-                    {
+                    {/* {
                         profile !== null && (
                             <Avatar className='user-avatar' src={profile.picture} sx={{ width: 35, height: 35 }}></Avatar>
                         )
-                    }
+                    } */}
                 </Toolbar>
             </AppBar>
         </Box>

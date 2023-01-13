@@ -1,21 +1,16 @@
 class RecLetterController < ApplicationController
-  before_action :set_rec_letters, only: [:show, :edit, :update, :destroy]
+  before_action :get_rec_letters, only: [:show, :edit, :update, :destroy]
 
   # GET /rec_letters
   # GET /rec_letters.json
   def index
-    @rec_letters = RecLetter.all.order(due_date: :asc)
     # render json: @rec_letters
   end
 
   # GET /rec_letter/1
   # GET /rec_letter/1.json
   def show
-    if @rec_letter
-      render json: @rec_letter
-    else
-      render json: @rec_letter.errors
-    end
+    render json: @rec_letters # TODO: handle errors
   end
 
   # GET /rec_letters/new
@@ -54,8 +49,8 @@ class RecLetterController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_rec_letters
-      @rec_letters = RecLetter.find(params[:id])
+    def get_rec_letters
+      @rec_letters = RecLetter.all.order(due_date: :asc)
     end
 
     # Only allow a list of trusted parameters through.

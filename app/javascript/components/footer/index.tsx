@@ -1,10 +1,11 @@
+import React from 'react'
 import './index.css'
 
 const Footer = () => {
     return (
         <footer id="footer">
             <div id="footer-copyright">
-                <p>Copyright © 2021 All Rights Reserved by Litcode.</p>
+                <p>Copyright © 2023 All Rights Reserved by InstantRec.</p>
             </div>
             <div id="footer-social-icons">
                 <a className="facebook" href="/"><i className="fab fa-facebook"></i></a>

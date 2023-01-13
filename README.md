@@ -27,11 +27,17 @@
 ./bin/importmap pin react react-dom
 yarn add react react-dom node-uuid
 ```
-- get esbuild and webpack
+- get esbuild and webpack on existing project
 ```bash
 ./bin/bundle add jsbundling-rails
 ./bin/rails javascript:install:[esbuild|rollup|webpack]
 ```
+
+- get react
+```bash
+./bin/rails webpacker:install:react
+```
+
 
 * esbuild
 run `yarn build --watch`. remember to run esbuild with `--loader:.js=jsx` option.
