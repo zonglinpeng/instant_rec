@@ -26,12 +26,19 @@ export default function RecLetter() {
             </thead>
             <tbody>
             {recletter &&
-                recletter.map(({ due_date, school, owner, assignee }, i) => (
-                <tr>
+                recletter.map(({
+                    rec_letter_id,
+                    due_date,
+                    school_name,
+                    professor_name,
+                    student_name
+
+                }, i) => (
+                <tr key={rec_letter_id}>
+                    <td>{school_name}</td>
+                    <td>{professor_name}</td>
+                    <td>{student_name}</td>
                     <td>{due_date}</td>
-                    <td>{school}</td>
-                    <td>{owner}</td>
-                    <td>{assignee}</td>
                 </tr>
                 ))}
             </tbody>

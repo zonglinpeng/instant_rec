@@ -13,6 +13,16 @@ students = Student.create([{ student_name: "student_test_1" }, { student_name: "
 professors = Professor.create([{ professor_name: "professor_test_1" }, { professor_name: "professor_test_2"}])
 schools = School.create([{ school_name: "school_1" }, { school_name: "school_2"}])
 RecLetter.create([
-  { student_name: students.first, professor_name: professors.first, school_name: schools.first, due_date: datatime_1},
-  { student_name: students.last, professor_name: professors.last, school_name: schools.last, due_date: datatime_2}
+  {
+    student_name: students.first.student_name,
+    professor_name: professors.first.professor_name,
+    school_name: schools.first.school_name,
+    due_date: datatime_1
+  },
+  {
+    student_name: students.last.student_name,
+    professor_name: professors.last.professor_name,
+    school_name: schools.last.school_name,
+    due_date: datatime_2
+  }
 ])

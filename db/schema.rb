@@ -14,12 +14,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_163002) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  # uuid as PK
   create_table "professors", id: false, force: :cascade do |t|
     t.string "professor_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  # rename to case
+  # text: rec_letter/ docx
   create_table "rec_letters", id: false, force: :cascade do |t|
     t.uuid "rec_letter_id", default: -> { "gen_random_uuid()" }
     t.datetime "due_date"
@@ -33,16 +36,27 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_163002) do
     t.index ["student_name"], name: "index_rec_letters_on_student_name_id"
   end
 
+  # case_change boolean
+  # event table or queue?
+  # eventual consistency, extentabilty
+  # event is text: reference by case_id
+
+  # uuid as PK
   create_table "schools", id: false, force: :cascade do |t|
     t.string "school_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  # uuid as PK
   create_table "students", id: false, force: :cascade do |t|
     t.string "student_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+
+  # GTH: attachment: multi-media
+
 
 end
