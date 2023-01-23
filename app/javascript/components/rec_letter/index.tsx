@@ -30,15 +30,17 @@ export default function RecLetter() {
                     rec_letter_id,
                     due_date,
                     school_name,
-                    professor_name,
-                    student_name
+                    professor_id,
+                    student_id,
+                    comment
 
                 }, i) => (
                 <tr key={rec_letter_id}>
                     <td>{school_name}</td>
-                    <td>{professor_name}</td>
-                    <td>{student_name}</td>
+                    <td>{professor_id}</td>
+                    <td>{student_id}</td>
                     <td>{due_date}</td>
+                    <td>{comment}</td>
                 </tr>
                 ))}
             </tbody>

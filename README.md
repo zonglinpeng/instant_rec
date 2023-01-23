@@ -77,6 +77,12 @@ Start PostgreSQL service
 brew services start postgresql@14
 ```
 
+DB migration
+```bash
+./bin/rails db:reset # if necesary
+./bin/rails db:migrate
+```
+
 Populate the database with dummy data entries
 ```bash
 ./bin/rails db:seed

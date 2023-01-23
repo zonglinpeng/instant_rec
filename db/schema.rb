@@ -14,49 +14,39 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_163002) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  # uuid as PK
   create_table "professors", id: false, force: :cascade do |t|
+    t.uuid "professor_id", default: -> { "gen_random_uuid()" }
     t.string "professor_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  # rename to case
-  # text: rec_letter/ docx
   create_table "rec_letters", id: false, force: :cascade do |t|
     t.uuid "rec_letter_id", default: -> { "gen_random_uuid()" }
     t.datetime "due_date"
-    t.string "school_name"
-    t.string "professor_name"
-    t.string "student_name"
+    t.text "comment"
+    t.uuid "school_id_id"
+    t.uuid "professor_id_id"
+    t.uuid "student_id_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["professor_name"], name: "index_rec_letters_on_professor_name_id"
-    t.index ["school_name"], name: "index_rec_letters_on_school_name_id"
-    t.index ["student_name"], name: "index_rec_letters_on_student_name_id"
+    t.index ["professor_id_id"], name: "index_rec_letters_on_professor_id_id"
+    t.index ["school_id_id"], name: "index_rec_letters_on_school_id_id"
+    t.index ["student_id_id"], name: "index_rec_letters_on_student_id_id"
   end
 
-  # case_change boolean
-  # event table or queue?
-  # eventual consistency, extentabilty
-  # event is text: reference by case_id
-
-  # uuid as PK
   create_table "schools", id: false, force: :cascade do |t|
+    t.uuid "school_id", default: -> { "gen_random_uuid()" }
     t.string "school_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  # uuid as PK
   create_table "students", id: false, force: :cascade do |t|
+    t.uuid "student_id", default: -> { "gen_random_uuid()" }
     t.string "student_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-
-  # GTH: attachment: multi-media
-
 
 end
