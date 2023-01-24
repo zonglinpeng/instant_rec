@@ -19,7 +19,7 @@ const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(
     <React.StrictMode>
-        <div className="App">
+        <div className="app">
             <BrowserRouter>
                 <Provider store={store}>
                     <Header></Header>
