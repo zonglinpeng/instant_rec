@@ -1,38 +1,50 @@
 import React, { useState } from "react";
 import api from '../../api'
-import Item from '../item'
-import PreView from "./pre_view";
+import './index.css'
+import SplitPane, {
+    Divider,
+    SplitPaneLeft,
+    SplitPaneRight,
+    SplitPaneTop,
+} from "./split_pane";
+import RecLetterContext from "./split_pane/rec_letter_context";
 
-
-function formatDate(string){
-    let options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(string).toLocaleDateString([], options);
-}
 
 export default function RecLetter() {
-  const [recletter, setRecLetter] = useState([]);
+  const [recLetters, setRecLetters] = useState([]);
+  const [curRecLetter, setCurRecLetter] = useState()
   const recLetterAPI = api.rec_letter()
 
   React.useEffect(() => {
     (async () => {
         let ls = await recLetterAPI.dummyGet()
         console.log(ls)
-        setRecLetter(ls)
+        setRecLetters(ls)
+        if (ls === undefined || ls.length == 0) {
+          setCurRecLetter(null)
+        } else {
+          setCurRecLetter(ls[0].rec_letter_id)
+        }
+
     })()
   }, [recLetterAPI]);
 
 
   return (
     <>
-        <h1>Recomendation Letter {recletter.length}</h1>
-        <aside className="left-col">
-            <Item>
-                <PreView rec_letters={recletter}></PreView>
-            </Item>
-        </aside>
-        <div className="right-col">
+      <RecLetterContext.Provider value={{ recLetters, curRecLetter, setCurRecLetter }}>
+          <SplitPane className="split-pane-row">
+            <SplitPaneLeft>
+              <SplitPane className="split-pane-col">
+                <SplitPaneTop />
+                <Divider className="separator-row" />
+              </SplitPane>
+            </SplitPaneLeft>
+            <Divider className="separator-col" />
 
-        </div>
+            <SplitPaneRight />
+          </SplitPane>
+      </RecLetterContext.Provider>
     </>
   );
 }

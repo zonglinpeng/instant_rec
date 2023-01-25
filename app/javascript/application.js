@@ -19,16 +19,14 @@ const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(
     <React.StrictMode>
-        <div className="app">
-            <BrowserRouter>
-                <Provider store={store}>
-                    <Header></Header>
-                        <Routes>
-                            <Route path="/" element={<RecLetter></RecLetter>} />
-                        </Routes>
-                    <Footer></Footer>
-                </Provider>
-            </BrowserRouter>
-        </div>
+        <BrowserRouter>
+            <Provider store={store}>
+                <Header></Header>
+                <Routes>
+                    <Route path="/" element={<RecLetter></RecLetter>} />
+                </Routes>
+                <Footer></Footer>
+            </Provider>
+        </BrowserRouter>
     </React.StrictMode>
 );
