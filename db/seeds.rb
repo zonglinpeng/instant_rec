@@ -47,7 +47,7 @@ RecLetter.create([
     professor_id_id: professors.first.professor_id,
     school_id_id: schools.first.school_id,
     due_date: datatime_1,
-    comment: comment_1
+    comment: comment_1,
   },
   {
     student_id_id: students.last.student_id,

@@ -1,32 +1,22 @@
 import React, { useState } from "react";
-import api from '../../api'
+import api from '../../../api'
 import './index.css'
-import SplitPane, {
-    Divider,
-    SplitPaneLeft,
-    SplitPaneRight,
-    SplitPaneTop,
-} from "./split_pane";
-import RecLetterContext from "./split_pane/rec_letter_context";
 
-
-export default function RecLetter() {
-  const [recLetters, setRecLetters] = useState([]);
-  const [curRecLetter, setCurRecLetter] = useState()
-  const recLetterAPI = api.rec_letter()
+export default function Request() {
+  const [professorList, setProfessorList] = useState([]);
+  const studentAPI = api.student()
 
   React.useEffect(() => {
     (async () => {
-        let ls = await recLetterAPI.dummyGet()
-        setRecLetters(ls)
+        let ls = await studentAPI.getProfessorList()
         if (ls === undefined || ls.length == 0) {
-          setCurRecLetter(null)
+          setProfessorList(null)
         } else {
-          setCurRecLetter(ls[0].rec_letter_id)
+          setProfessorList(ls[0].rec_letter_id)
         }
 
     })()
-  }, [recLetterAPI]);
+  }, [studentAPI]);
 
 
   return (

@@ -25,6 +25,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_163002) do
     t.uuid "rec_letter_id", default: -> { "gen_random_uuid()" }
     t.datetime "due_date"
     t.text "comment"
+    t.string "status", default: "create"
     t.uuid "school_id_id"
     t.uuid "professor_id_id"
     t.uuid "student_id_id"

@@ -10,6 +10,7 @@ import {
     Route
   } from "react-router-dom";
 import RecLetter from './components/rec_letter'
+import Student from './components/student'
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from 'react-redux'
 import { store } from './store'
@@ -24,6 +25,7 @@ root.render(
                 <Header></Header>
                 <Routes>
                     <Route path="/" element={<RecLetter></RecLetter>} />
+                    <Route path="/student" element={<Student></Student>} />
                 </Routes>
                 <Footer></Footer>
             </Provider>
