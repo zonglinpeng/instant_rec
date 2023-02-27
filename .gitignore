@@ -12,6 +12,9 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+.metals
+.vscode
+.DS_Store
 
 # Ignore pidfiles, but keep the directory.
 /tmp/pids/*

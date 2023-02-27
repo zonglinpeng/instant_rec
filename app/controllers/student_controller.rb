@@ -4,22 +4,19 @@ class StudentController < ApplicationController
   def index
   end
 
-
-
   def get_professor_id_list
     @professor_id_list = Professor.all
     render json: @professor_id_list
   end
 
-  def create_requst
+  def get_school_id_list
+    @school_id_list = School.all
+    render json: @school_id_list
+  end
+
+  def create_student_requst
     params = JSON.parse(request.body.string)
-    professor_id = Professor.where(name: rec_letter_params["professor_name"])
-
-    @rec_letter = RecLetter.new({
-      "due_date": rec_letter_params["due_date"],
-      "professor_id": professor_id # TODO
-    })
-
+    @rec_letter = Student.create_requst(params)
     if @rec_letter.save
       render json: @rec_letter
     else

@@ -1,8 +1,0 @@
-.d-flex {
-    display: flex !important;
-    flex-direction: column !important;
-}
-
-*, *::before, *::after {
-    box-sizing: border-box;
-}

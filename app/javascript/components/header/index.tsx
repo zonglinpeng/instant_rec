@@ -33,7 +33,7 @@ export default function Header() {
                         </Typography>
                     </Button>
                     <Box sx={{ flexGrow: 1 }}></Box>
-                    <Button color="inherit" component={Link} to="/student">Request</Button>
+                    <Button color="inherit" component={Link} to="/student/init_request">Request</Button>
                     {/* {
                         profile !== null && (
                             <Avatar className='user-avatar' src={profile.picture} sx={{ width: 35, height: 35 }}></Avatar>

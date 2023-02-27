@@ -1,28 +1,28 @@
 import React, { useState } from "react";
-import api from '../../api'
+import api from '../../../api'
 import './index.css'
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { useNavigate } from 'react-router-dom';
 
 
-export default function Student() {
+export default function ProfessorList() {
   const [professorList, setProfessorList] = useState([]);
   const studentAPI = api.student()
-  let navigate = useNavigate()
+  const navigate = useNavigate()
 
   React.useEffect(() => {
     (async () => {
         let ls = await studentAPI.getProfessorList()
-        if (ls === undefined || ls.length == 0) {
-          setProfessorList(null)
-        } else {
+        if (!(ls === undefined) || (ls.length == 0)) {
           setProfessorList(ls)
         }
     })()
   }, [studentAPI]);
 
   const onClickRow = (e: any) => {
-    navigate(`${e}`) // TODO
+    navigate(`${e.id}`, {
+      state: {professor_id: e.id}
+    })
   }
 
   const professorToGridRows = (qs: any) => {
@@ -32,11 +32,11 @@ export default function Student() {
             professor_name: q.professor_name
         }
     })
-}
+  }
   const columns: GridColDef[] = [
     { field: 'professor_id', headerName: 'ID', flex: 1, },
     { field: 'professor_name', headerName: 'Name', flex: 1, },
-    ];
+  ];
 
   return (
     <>
@@ -51,5 +51,4 @@ export default function Student() {
       </DataGrid>
     </>
   );
-
 }

@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   get 'professor/index'
   get 'student', to: "student#index"
   get 'student/init_request', to: "student#get_professor_id_list"
-  post 'student/creat_requst', to: "student#creat_requst"
+  get 'student/school_list', to: "student#get_school_id_list"
+  put 'student/create_request', to: "student#create_student_requst"
 
   post "rec_letters/create"
   root "rec_letter#index"

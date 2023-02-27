@@ -10,7 +10,8 @@ import {
     Route
   } from "react-router-dom";
 import RecLetter from './components/rec_letter'
-import Student from './components/student'
+import ProfessorList from './components/request/professor_list'
+import StudentRequest  from "./components/request";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from 'react-redux'
 import { store } from './store'
@@ -25,7 +26,8 @@ root.render(
                 <Header></Header>
                 <Routes>
                     <Route path="/" element={<RecLetter></RecLetter>} />
-                    <Route path="/student" element={<Student></Student>} />
+                    <Route path="/student/init_request" element={<ProfessorList></ProfessorList>} />
+                    <Route path="/student/init_request/:professor_id" element={<StudentRequest></StudentRequest>} />
                 </Routes>
                 <Footer></Footer>
             </Provider>
