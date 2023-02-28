@@ -11,7 +11,7 @@ import {
   } from "react-router-dom";
 import RecLetter from './components/rec_letter'
 import ProfessorList from './components/request/professor_list'
-import StudentRequest  from "./components/request";
+import StudentRequest from "./components/request";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from 'react-redux'
 import { store } from './store'

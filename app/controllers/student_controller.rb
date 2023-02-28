@@ -1,6 +1,8 @@
 require 'json'
 
 class StudentController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
   def index
   end
 
@@ -14,13 +16,13 @@ class StudentController < ApplicationController
     render json: @school_id_list
   end
 
-  def create_student_requst
+  def create_student_request
     params = JSON.parse(request.body.string)
-    @rec_letter = Student.create_requst(params)
-    if @rec_letter.save
-      render json: @rec_letter
+    @rec_letters = RecLetter.create_request(params)
+    if @rec_letters.save
+      render json: @rec_letters
     else
-      render json: @rec_letter.errors
+      render json: @rec_letters.errors
     end
   end
 

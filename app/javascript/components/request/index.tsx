@@ -13,10 +13,12 @@ import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import Autocomplete from '@mui/material/Autocomplete';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function StudentRequest() {
   const studentAPI = api.student()
+  const navigate = useNavigate()
   const [schoolID, setSchoolID] = useState('');
   const [schoolIDList, setSchoolIDList] = useState([]);
   const [dueDate, setDueDate] = useState<Dayjs | null>(
@@ -36,8 +38,8 @@ export default function StudentRequest() {
     return `${year}${separator}${month<10?`0${month}`:`${month}`}${separator}${date}`
   }
 
-  React.useEffect(() => {
-    (async () => {
+  React.useEffect(
+    () => {(async () => {
         let ls = await studentAPI.getSchoolList()
         if (!(ls === undefined || ls.length == 0)) {
           setSchoolIDList(ls)
@@ -47,7 +49,20 @@ export default function StudentRequest() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log( 'dueDate:', dueDate?.format('YYYY-MM-DD'), 'schoolID: ', schoolID, 'comment: ', comment);
+    studentAPI.createRequest(
+      dueDate?.format('YYYY-MM-DD'),
+      schoolID,
+      comment
+    ).then(_ => navigate('/'))
+  }
+
+  const submitRequest = () => {
+    async () => await studentAPI.createRequest(
+      dueDate?.format('YYYY-MM-DD'),
+      schoolID,
+      comment
+    )
+    navigate('/')
   }
 
 /*
@@ -65,7 +80,7 @@ t.uuid "rec_letter_id", default: -> { "gen_random_uuid()" }
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Box
         component="form"
-        onSubmit={handleSubmit}
+        onSubmit={(event) => handleSubmit(event)}
         sx={{
           '& .MuiTextField-root': { m: 1, width: '30ch' },
         }}
@@ -107,6 +122,7 @@ t.uuid "rec_letter_id", default: -> { "gen_random_uuid()" }
           </Stack>
           <Button
             type="submit"
+            // onClick={submitRequest}
           >
             Submit
           </Button>

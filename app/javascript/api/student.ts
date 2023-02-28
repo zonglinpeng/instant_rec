@@ -25,4 +25,20 @@ export default class StudentAPI {
       }
       return rsp.data
     }
+
+    async createRequest(dueDate, schoolID, comment): Promise<[]> {
+      const rsp = await this.client.put(
+        "/student/create_request",
+        {
+          "due_date": dueDate,
+          "student_id_id": schoolID,
+          "comment": comment
+        }
+      )
+      if (rsp.status !== 200) {
+        throw new Error("expect http 200")
+      }
+      return rsp.data
+    }
+
 }
