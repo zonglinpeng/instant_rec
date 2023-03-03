@@ -2,6 +2,7 @@ require 'json'
 
 class StudentController < ApplicationController
   skip_before_action :verify_authenticity_token
+  before_action :authenticate_student!
 
   def index
   end

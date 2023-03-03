@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :professors # users/sign_in, /users/sign_out, and /users/password/new
+  devise_for :students
   get 'professor/index'
   get 'student', to: "student#index"
   get 'student/init_request', to: "student#get_professor_id_list"

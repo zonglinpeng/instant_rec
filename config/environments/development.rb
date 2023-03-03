@@ -10,7 +10,7 @@ Rails.application.configure do
   # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
   # config.file_watcher = ActiveSupport::FileUpdateChecker
   # config.reload_classes_only_on_change = true
-
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   # Do not eager load code on boot.
   config.eager_load = false
 

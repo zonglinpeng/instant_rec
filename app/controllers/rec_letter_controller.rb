@@ -1,5 +1,5 @@
 class RecLetterController < ApplicationController
-  before_action :get_rec_letters, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_student!, :get_rec_letters, only: [:show, :edit, :update, :destroy]
 
   # GET /rec_letters
   # GET /rec_letters.json
