@@ -1,11 +1,14 @@
 import axios, { AxiosInstance } from "axios";
 import RecLetterAPI from "./rec_letter";
 import StudentAPI from "./student"
+import AuthAPI from "./auth"
+
 
 class InstantRecAPI {
   client: AxiosInstance;
   private recLetterInstance;
   private studentInstance;
+  private authInstance;
 
   constructor(baseURL: string) {
     this.client = axios.create({
@@ -13,6 +16,7 @@ class InstantRecAPI {
     })
     this.recLetterInstance = new RecLetterAPI(this.client)
     this.studentInstance = new StudentAPI(this.client)
+    this.authInstance = new AuthAPI(this.client)
   }
 
   rec_letter(): RecLetterAPI {
@@ -22,9 +26,13 @@ class InstantRecAPI {
   student(): StudentAPI {
     return this.studentInstance
   }
+
+  auth(): AuthAPI {
+    return this.authInstance
+  }
 }
 
-const LITCODE_BASE_URL = "/"
-const api = new InstantRecAPI(LITCODE_BASE_URL)
+const BASE_URL = "/"
+const api = new InstantRecAPI(BASE_URL)
 
 export default api;

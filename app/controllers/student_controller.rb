@@ -27,4 +27,12 @@ class StudentController < ApplicationController
     end
   end
 
+  def is_student_logged_in
+    render boolean: student_signed_in?
+  end
+
+  def is_student_logged_in
+    render boolean: professor_signed_in?
+  end
+
 end

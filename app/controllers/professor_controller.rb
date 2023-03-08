@@ -1,5 +1,5 @@
 class ProfessorController < ApplicationController
-  before_action :authenticate_student!
+  before_action :authenticate_professor!
 
   def index
   end

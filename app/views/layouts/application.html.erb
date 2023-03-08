@@ -11,7 +11,10 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
-  <body>
+  <body
+    data_student_signed_in="<%= student_signed_in? ? "true" : "false" %>"
+    data-professor-signed-in="<%= professor_signed_in? ? "true" : "false" %>"
+  >
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>

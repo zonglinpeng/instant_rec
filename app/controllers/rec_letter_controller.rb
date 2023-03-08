@@ -4,7 +4,7 @@ class RecLetterController < ApplicationController
   # GET /rec_letters
   # GET /rec_letters.json
   def index
-    # render json: @rec_letters
+    puts "need auth"
   end
 
   # GET /rec_letter/1
