@@ -1,4 +1,3 @@
 class ApplicationController < ActionController::Base
-  # class << self
-  #   def student_signed_in?
+  # protect_from_forgery except: :sign_in
 end

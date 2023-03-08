@@ -12,6 +12,9 @@ import {
 import RecLetter from './components/rec_letter'
 import ProfessorList from './components/request/professor_list'
 import StudentRequest from "./components/request";
+import SignIn from "./components/auth"
+import SignUp from "./components/auth/sign_up"
+import SignOut from "./components/auth/sign_out"
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from 'react-redux'
 import { store } from './store'
@@ -40,9 +43,17 @@ root.render(
             </BrowserRouter>
 
             ) : (
-            <h1>
-                not logged in
-            </h1>
+                <BrowserRouter>
+                <Provider store={store}>
+                    <Header></Header>
+                    <Routes>
+                        <Route path="/" element={<SignIn></SignIn>} />
+                        <Route path="/student/sign_up" element={<SignUp></SignUp>} />
+                        <Route path="/student/sign_out" element={<SignOut></SignOut>} />
+                    </Routes>
+                    <Footer></Footer>
+                </Provider>
+            </BrowserRouter>
             )
         }
     </React.StrictMode>
