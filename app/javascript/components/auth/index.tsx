@@ -13,19 +13,30 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
+
 
 const theme = createTheme();
 
 export default function SignIn() {
+  function refreshPage() {
+    window.location.reload();
+  }
+  const [isProfessor, setIsProfessor] = React.useState(false)
   const authAPI = api.auth()
+  const navigate = useNavigate()
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-    authAPI.studentSignIn(data.get('email'), data.get('password'))
+    if (isProfessor) {
+        authAPI.professorSignIn(data.get('email'), data.get('password'))
+        .catch(_ => alert("Invalid username or password. Try again"))
+        .then(_ => refreshPage())
+    } else {
+        authAPI.studentSignIn(data.get('email'), data.get('password'))
+        .catch(_ => alert("Invalid username or password. Try again"))
+        .then(_ => refreshPage())
+    }
 
   };
 
@@ -72,8 +83,15 @@ export default function SignIn() {
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
+                  control={
+                    <Checkbox
+                        value="allowExtraEmails"
+                        color="primary"
+                        onChange={() => (setIsProfessor(true))}
+                    />
+                    }
+                  label="I am a professor"
+                  id="isProfessor"
                 />
               </Grid>
             </Grid>
@@ -87,8 +105,8 @@ export default function SignIn() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
-                  TODO: Don't have an account? Sign up
+                <Link onClick={() => navigate("/student/sign_up")} variant="body2">
+                  Don't have an account? Sign up
                 </Link>
               </Grid>
             </Grid>

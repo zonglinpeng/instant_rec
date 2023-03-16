@@ -1,4 +1,5 @@
 import * as React from 'react';
+import api from '../../../api';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,17 +13,30 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme();
 
 export default function SignUp() {
+  function refreshPage() {
+    window.location.reload();
+  }
+  const authAPI = api.auth()
+  const [isProfessor, setIsProfessor] = React.useState(false)
+  const navigate = useNavigate()
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    if (isProfessor) {
+      authAPI.professorSignUp(data.get('firstName'), data.get('lastName'), data.get('email'), data.get('password'))
+      .then(() => navigate("/"))
+      .then(() => refreshPage())
+    }
+    else {
+      authAPI.studentSignUp(data.get('firstName'), data.get('lastName'), data.get('email'), data.get('password'))
+      .then(() => navigate("/"))
+      .then(() => refreshPage())
+    }
   };
 
   return (
@@ -88,9 +102,14 @@ export default function SignUp() {
                 />
               </Grid>
               <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
+              <FormControlLabel
+                  control={<Checkbox
+                    value="isProfessor"
+                    color="primary"
+                    onChange={() => (setIsProfessor(true))}
+                  />}
+                  label="I am a professor"
+                  id="isProfessor"
                 />
               </Grid>
             </Grid>
@@ -104,7 +123,7 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link onClick={() => navigate("/")}variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>

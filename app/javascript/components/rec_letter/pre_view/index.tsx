@@ -22,6 +22,7 @@ const PreView = (prop: PreViewProps) => {
     }
 
     const lettersToPreviewList = (ls: RecLetter[]) => {
+        console.log(ls)
         return ls.map((l) => {
             return (
                 <Box sx={{ width: '100%' }} key={l.rec_letter_id}>

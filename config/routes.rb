@@ -12,7 +12,9 @@ Rails.application.routes.draw do
   post "rec_letters/create"
   root "rec_letter#index"
 
-  get "api/show", to: "rec_letter#show"
+  get "/rec_letters/student/show", to: "rec_letter_student#show"
+  get "/rec_letters/professor/show", to: "rec_letter_professor#show"
+
   post "rec_letters/create"
   delete "rec_letters/:id", to: 'rec_letter#destroy'
 end

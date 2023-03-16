@@ -14,15 +14,33 @@ export default function RecLetter() {
   const [recLetters, setRecLetters] = useState([]);
   const [curRecLetter, setCurRecLetter] = useState()
   const recLetterAPI = api.rec_letter()
+  const authAPI = api.auth()
 
+  const [isStudentSignedIn, setIsStudentSignedIn] = useState('');
+  const [isProfessorSignedIn, setIsProfessorSignedIn] = useState('');
+  function refreshPage() {
+      window.location.reload();
+  }
   React.useEffect(() => {
     (async () => {
-        let ls = await recLetterAPI.dummyGet()
-        setRecLetters(ls)
+        const rss = await authAPI.isStudentSignedIn();
+        const rsp = await authAPI.isProfessorSignedIn();
+        setIsStudentSignedIn(rss);
+        setIsProfessorSignedIn(rsp);
+        let ls;
+        if (rss) {
+          ls = await recLetterAPI.recLetterStudentShow()
+        }
+
+        if (rsp) {
+          ls = await recLetterAPI.recLetterProfessorShow()
+        }
+
+        setRecLetters(ls);
         if (ls === undefined || ls.length == 0) {
-          setCurRecLetter(null)
+          setCurRecLetter(null);
         } else {
-          setCurRecLetter(ls[0].rec_letter_id)
+          setCurRecLetter(ls[0].rec_letter_id);
         }
 
     })()

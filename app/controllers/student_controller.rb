@@ -2,7 +2,7 @@ require 'json'
 
 class StudentController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :authenticate_student!
+  before_action :authenticate_student! || :authenticate_professor!
 
   def index
   end
@@ -27,12 +27,12 @@ class StudentController < ApplicationController
     end
   end
 
-  def is_student_logged_in
-    render boolean: student_signed_in?
+  def is_student_signed_in
+    render json: current_student
   end
 
-  def is_student_logged_in
-    render boolean: professor_signed_in?
+  def is_professor_signed_in
+    render json: current_professor
   end
 
 end
