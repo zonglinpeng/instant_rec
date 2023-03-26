@@ -26,12 +26,14 @@ export default class StudentAPI {
       return rsp.data
     }
 
-    async createRequest(dueDate, schoolID, comment): Promise<[]> {
+    async createRequest(dueDate, professorID, comment): Promise<[]> {
+      const token = document.querySelector('[name=csrf-token]').content
+      this.client.defaults.headers.common['X-CSRF-TOKEN'] = token
       const rsp = await this.client.put(
         "/student/create_request",
         {
           "due_date": dueDate,
-          "student_id_id": schoolID,
+          "professor_id_id": professorID,
           "comment": comment
         }
       )

@@ -1,24 +1,14 @@
-require 'json'
 
 class StudentController < ApplicationController
-  skip_before_action :verify_authenticity_token
-  before_action :authenticate_student! || :authenticate_professor!
+  # skip_before_action :verify_authenticity_token
+  before_action :authenticate_student!
 
   def index
   end
 
-  def get_professor_id_list
-    @professor_id_list = Professor.all
-    render json: @professor_id_list
-  end
-
-  def get_school_id_list
-    @school_id_list = School.all
-    render json: @school_id_list
-  end
-
   def create_student_request
     params = JSON.parse(request.body.string)
+    params["student_id"] = current_student.student_id
     @rec_letters = RecLetter.create_request(params)
     if @rec_letters.save
       render json: @rec_letters
@@ -27,12 +17,8 @@ class StudentController < ApplicationController
     end
   end
 
-  def is_student_signed_in
-    render json: current_student
+  def get_professor_id_list
+    @professor_id_list = Professor.all
+    render json: @professor_id_list
   end
-
-  def is_professor_signed_in
-    render json: current_professor
-  end
-
 end

@@ -51,7 +51,7 @@ export default function StudentRequest() {
     event.preventDefault();
     studentAPI.createRequest(
       dueDate?.format('YYYY-MM-DD'),
-      schoolID,
+      location.state.professor_id,
       comment
     ).then(_ => navigate('/'))
   }
@@ -104,11 +104,11 @@ t.uuid "rec_letter_id", default: -> { "gen_random_uuid()" }
           />
           <Autocomplete
             disablePortal
-            id="For School"
+            id="schoolID"
             options={schoolIDList}
             getOptionLabel={(option) => option.school_name || ""}
             onChange={(_, v) => setSchoolID(v?.school_id)}
-            renderInput={(params) => <TextField {...params} label="schoolID" />}
+            renderInput={(params) => <TextField {...params} label="For School" />}
           />
           <TextField
             id="standard-multiline-static"

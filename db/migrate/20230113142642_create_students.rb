@@ -1,9 +1,9 @@
 class CreateStudents < ActiveRecord::Migration[7.0]
   def change
-    create_table :students, :primary_key => :student_id do |t|
+    create_table :students, id: false, :primary_key => :student_id do |t|
       t.uuid :student_id, :default => 'gen_random_uuid()'
       t.string :student_name
-
+      t.references :school_id, type: :uuid
       t.timestamps
     end
   end

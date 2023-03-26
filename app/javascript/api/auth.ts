@@ -25,13 +25,33 @@ export default class AuthAPI {
         return rsp.data
     }
 
-    async studentSignUp(firstName, lastName, email, password): Promise<boolean> {
+    async professorSignIn(email, password, rememberMe='true'): Promise<boolean> {
+      var bodyFormData = new FormData();
+      const token = document.querySelector('[name=csrf-token]').content
+      this.client.defaults.headers.common['X-CSRF-TOKEN'] = token
+      bodyFormData.append('authenticity_token', token)
+      bodyFormData.append('professor[email]', email)
+      bodyFormData.append('professor[password]', password)
+      bodyFormData.append('professor[remember_me]', rememberMe == 'true'? '0':'1')
+      bodyFormData.append('commit', 'Log in')
+      const rsp = await this.client.post(
+        "/professors/sign_in",
+        bodyFormData
+      )
+      if (rsp.status !== 200) {
+        throw new Error("expect http 200")
+      }
+      return rsp.data
+    }
+
+    async studentSignUp(firstName, lastName, email, password, schoolID): Promise<boolean> {
         var bodyFormData = new FormData();
         const token = document.querySelector('[name=csrf-token]').content
         this.client.defaults.headers.common['X-CSRF-TOKEN'] = token
         bodyFormData.append('authenticity_token', token)
         bodyFormData.append('student[email]', email)
-        bodyFormData.append('student[name]', firstName.concat(lastName))
+        bodyFormData.append('student[student_name]', firstName.concat(" ", lastName))
+        bodyFormData.append('student[school_id_id]', schoolID)
         bodyFormData.append('student[password]', password)
         bodyFormData.append('student[password_confirmation]', password)
         bodyFormData.append('commit', 'Sign up')
@@ -45,13 +65,14 @@ export default class AuthAPI {
         return rsp.data
     }
 
-    async professorSignUp(firstName, lastName, email, password): Promise<boolean> {
+    async professorSignUp(firstName, lastName, email, password, schoolID): Promise<boolean> {
         var bodyFormData = new FormData();
         const token = document.querySelector('[name=csrf-token]').content
         this.client.defaults.headers.common['X-CSRF-TOKEN'] = token
         bodyFormData.append('authenticity_token', token)
         bodyFormData.append('professor[email]', email)
-        bodyFormData.append('professor[name]', firstName.concat(lastName))
+        bodyFormData.append('professor[professor_name]', firstName.concat(" ", lastName))
+        bodyFormData.append('professor[school_id_id]', schoolID)
         bodyFormData.append('professor[password]', password)
         bodyFormData.append('professor[password_confirmation]', password)
         bodyFormData.append('commit', 'Sign up')
@@ -75,25 +96,6 @@ export default class AuthAPI {
         return rsp.data
     }
 
-    async professorSignIn(email, password, rememberMe='true'): Promise<boolean> {
-        var bodyFormData = new FormData();
-        const token = document.querySelector('[name=csrf-token]').content
-        this.client.defaults.headers.common['X-CSRF-TOKEN'] = token
-        bodyFormData.append('authenticity_token', token)
-        bodyFormData.append('professor[email]', email)
-        bodyFormData.append('professor[password]', password)
-        bodyFormData.append('professor[remember_me]', rememberMe == 'true'? '0':'1')
-        bodyFormData.append('commit', 'Log in')
-        const rsp = await this.client.post(
-          "/professors/sign_in",
-          bodyFormData
-        )
-        if (rsp.status !== 200) {
-          throw new Error("expect http 200")
-        }
-        return rsp.data
-    }
-
     async professorSignOut(): Promise<boolean> {
         const rsp = await this.client.get(
           "/professors/sign_out",
@@ -107,7 +109,7 @@ export default class AuthAPI {
 
     async isStudentSignedIn(): Promise<string> {
       const rsp = await this.client.get(
-        "/student/is_signed_in",
+        "/public/is_student_signed_in",
         {
         }
       )
@@ -119,7 +121,7 @@ export default class AuthAPI {
 
     async isProfessorSignedIn(): Promise<string> {
         const rsp = await this.client.get(
-          "/professor/is_signed_in",
+          "/public/is_professor_signed_in",
           {
           }
         )

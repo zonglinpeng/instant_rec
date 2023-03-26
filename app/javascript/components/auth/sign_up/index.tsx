@@ -13,6 +13,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Autocomplete from '@mui/material/Autocomplete';
 import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme();
@@ -21,19 +22,45 @@ export default function SignUp() {
   function refreshPage() {
     window.location.reload();
   }
-  const authAPI = api.auth()
-  const [isProfessor, setIsProfessor] = React.useState(false)
   const navigate = useNavigate()
+  const authAPI = api.auth()
+  const studentAPI = api.student()
+  const [isProfessor, setIsProfessor] = React.useState(false)
+  const [schoolIDList, setSchoolIDList] = React.useState([]);
+  const [schoolID, setSchoolID] = React.useState('');
+
+  React.useEffect(
+    () => {(async () => {
+        let ls = await studentAPI.getSchoolList()
+        if (!(ls === undefined || ls.length == 0)) {
+
+          setSchoolIDList(ls)
+        }
+    })()
+  }, [studentAPI]);
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     if (isProfessor) {
-      authAPI.professorSignUp(data.get('firstName'), data.get('lastName'), data.get('email'), data.get('password'))
+      authAPI.professorSignUp(
+        data.get('firstName'),
+        data.get('lastName'),
+        data.get('email'),
+        data.get('password'),
+        schoolID
+      )
       .then(() => navigate("/"))
       .then(() => refreshPage())
     }
     else {
-      authAPI.studentSignUp(data.get('firstName'), data.get('lastName'), data.get('email'), data.get('password'))
+      authAPI.studentSignUp(
+        data.get('firstName'),
+        data.get('lastName'),
+        data.get('email'),
+        data.get('password'),
+        schoolID
+      )
       .then(() => navigate("/"))
       .then(() => refreshPage())
     }
@@ -88,6 +115,16 @@ export default function SignUp() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Autocomplete
+                  disablePortal
+                  id="schoolID"
+                  options={schoolIDList}
+                  getOptionLabel={(option) => option.school_name || ""}
+                  onChange={(_, v) => setSchoolID(v?.school_id)}
+                  renderInput={(params) => <TextField {...params} label="For School" />}
                 />
               </Grid>
               <Grid item xs={12}>

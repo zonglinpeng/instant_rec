@@ -31,8 +31,7 @@ export default function RecLetter() {
         if (rss) {
           ls = await recLetterAPI.recLetterStudentShow()
         }
-
-        if (rsp) {
+        else if (rsp) {
           ls = await recLetterAPI.recLetterProfessorShow()
         }
 

@@ -9,50 +9,57 @@ datatime_1 = "2023-03-01 00:00:00"
 datatime_2 = "2023-02-28 00:00:00"
 school_1 = "UIUC"
 school_2 = "WPI"
+id_1 = "yyds_1"
+id_2 = "yyds_2"
 comment_1 = "Can I get a recommendation, please?"
 comment_2 = "Give me that letter ASAP!!!"
+schools = School.create([
+  {
+    school_id: id_1,
+    school_name: "UIUC"
+  },
+  {
+    school_id: id_2,
+    school_name: "WPI"
+  }
+])
+
 students = Student.create([
   {
     student_id: "1a",
-    student_name: "student_test_1"
+    student_name: "student_test_1",
+    school_id_id: id_2
   },
   {
     student_id: "1b",
-    student_name: "student_test_2"
+    student_name: "student_test_2",
+    school_id_id: id_1
   }
 ])
+
 professors = Professor.create([
   {
     professor_id: "2a",
-    professor_name: "professor_test_1"
+    professor_name: "professor_test_1",
+    school_id_id: id_2
   },
   {
     professor_id: "2b",
-    professor_name: "professor_test_2"
+    professor_name: "professor_test_2",
+    school_id_id: id_1
   }
 ])
-schools = School.create([
+
+student.first.create([
   {
-    school_id: "3a",
-    school_name: "school_1"
-  },
-  {
-    school_id: "3b",
-    school_name: "school_2"
-  }
-])
-RecLetter.create([
-  {
-    student_id_id: students.first.student_id,
-    professor_id_id: professors.first.professor_id,
-    school_id_id: schools.first.school_id,
+    student_id_id: "1a",
+    professor_id_id: "1b",
     due_date: datatime_1,
     comment: comment_1,
   },
   {
-    student_id_id: students.last.student_id,
-    professor_id_id: professors.last.professor_id,
-    school_id_id: schools.last.school_id,
+    student_id_id: "2a",
+    professor_id_id: "2b",
     due_date: datatime_2,
     comment: comment_2
   }

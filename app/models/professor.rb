@@ -4,5 +4,6 @@ class Professor < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :rec_letters, dependent: :delete_all
+  has_one :school
   self.primary_key = :professor_id
 end

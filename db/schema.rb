@@ -17,6 +17,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_02_003851) do
   create_table "professors", id: false, force: :cascade do |t|
     t.uuid "professor_id", default: -> { "gen_random_uuid()" }
     t.string "professor_name"
+    t.uuid "school_id_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "email", default: "", null: false
@@ -26,6 +27,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_02_003851) do
     t.datetime "remember_created_at"
     t.index ["email"], name: "index_professors_on_email", unique: true
     t.index ["reset_password_token"], name: "index_professors_on_reset_password_token", unique: true
+    t.index ["school_id_id"], name: "index_professors_on_school_id_id"
   end
 
   create_table "rec_letters", id: false, force: :cascade do |t|
@@ -33,13 +35,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_02_003851) do
     t.datetime "due_date"
     t.text "comment"
     t.string "status", default: "create"
-    t.uuid "school_id_id"
     t.uuid "professor_id_id"
     t.uuid "student_id_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["professor_id_id"], name: "index_rec_letters_on_professor_id_id"
-    t.index ["school_id_id"], name: "index_rec_letters_on_school_id_id"
     t.index ["student_id_id"], name: "index_rec_letters_on_student_id_id"
   end
 
@@ -53,6 +53,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_02_003851) do
   create_table "students", id: false, force: :cascade do |t|
     t.uuid "student_id", default: -> { "gen_random_uuid()" }
     t.string "student_name"
+    t.uuid "school_id_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "email", default: "", null: false
@@ -62,6 +63,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_02_003851) do
     t.datetime "remember_created_at"
     t.index ["email"], name: "index_students_on_email", unique: true
     t.index ["reset_password_token"], name: "index_students_on_reset_password_token", unique: true
+    t.index ["school_id_id"], name: "index_students_on_school_id_id"
   end
 
 end
