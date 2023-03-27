@@ -5,7 +5,10 @@ Rails.application.routes.draw do
   get "public/is_professor_signed_in", to: "public#is_professor_signed_in"
 
   get 'professor/index'
+  get 'professor/current_professor', to: "professor#get_current_professor"
+
   get 'student', to: "student#index"
+  get 'student/current_student', to: "student#get_current_student"
   get 'student/init_request', to: "student#get_professor_id_list"
   get 'student/school_list', to: "school#get_school_id_list"
   put 'student/create_request', to: "student#create_student_request"

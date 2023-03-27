@@ -7,22 +7,69 @@ import './index.css'
 import { Link } from "react-router-dom";
 // import Avatar from '@mui/material/Avatar';
 // import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-// import api from '../../api/litcode';
+import api from '../../api';
 import { useEffect, useState } from 'react';
 import React from 'react';
 
 export default function Header() {
-    // const userAPI = api.user()
-    // const [profile, setProfile] = useState<UserProfile | null>(null)
+    const authAPI = api.auth()
+    const [buttons, setButtons] = useState();
+    const [isStudentSignedIn, setIsStudentSignedIn] = useState('');
+    const [isProfessorSignedIn, setIsProfessorSignedIn] = useState('');
 
-    // useEffect(() => {
-    //     (
-    //         async () => {
-    //             const rst = await userAPI.profile()
-    //             setProfile(rst)
-    //         }
-    //     )()
-    // }, [userAPI])
+    useEffect(() => {
+        (
+            async () => {
+                const rss = await authAPI.isStudentSignedIn()
+                const rsp = await authAPI.isProfessorSignedIn()
+                setIsStudentSignedIn(rss)
+                setIsProfessorSignedIn(rsp)
+                if (rss != '') {
+                    await authAPI.studentSignOut()
+                }
+                if (rsp != '') {
+                    await authAPI.professorSignOut()
+                }
+            }
+        )().then(renderComp)
+        }, [authAPI])
+
+    const renderComp = () => {
+        // (async () => {
+        //     const rss = await authAPI.isStudentSignedIn()
+        //     const rsp = await authAPI.isProfessorSignedIn()
+        //     setIsStudentSignedIn(rss)
+        //     setIsProfessorSignedIn(rsp)
+        //     if (rss != '') {
+        //         await authAPI.studentSignOut()
+        //     }
+        //     if (rsp != '') {
+        //         await authAPI.professorSignOut()
+        //     }
+        // }
+        // )().then(() => {
+        if (isStudentSignedIn){
+            return (
+                <div>
+                    <Button color="inherit" component={Link} to="/student/init_request">Request</Button>
+                    <Button color="inherit" component={Link} to="/student/sign_out">LogOut</Button>
+                </div>
+            );
+        }
+        else if (isProfessorSignedIn) {
+            return(
+                <div>
+                    <Button color="inherit" component={Link} to="/student/sign_out">LogOut</Button>
+                </div>
+            );
+        }
+        else {
+            return(
+                <div></div>
+            );
+        }
+    // })
+    }
 
     return (
         <Box id="header" >
@@ -34,8 +81,7 @@ export default function Header() {
                         </Typography>
                     </Button>
                     <Box sx={{ flexGrow: 1 }}></Box>
-                    <Button color="inherit" component={Link} to="/student/init_request">Request</Button>
-                    <Button color="inherit" component={Link} to="/student/sign_out">LogOut</Button>
+                    {renderComp()}
                     {/* <Avatar className='user-avatar' src={()=>AccountCircleIcon} sx={{ width: 35, height: 35 }}></Avatar> */}
                 </Toolbar>
             </AppBar>

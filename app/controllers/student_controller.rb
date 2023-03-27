@@ -21,4 +21,7 @@ class StudentController < ApplicationController
     @professor_id_list = Professor.all
     render json: @professor_id_list
   end
+
+  def get_current_student
+    render json: current_student
 end

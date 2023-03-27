@@ -15,9 +15,7 @@ export default function RecLetter() {
   const [curRecLetter, setCurRecLetter] = useState()
   const recLetterAPI = api.rec_letter()
   const authAPI = api.auth()
-
-  const [isStudentSignedIn, setIsStudentSignedIn] = useState('');
-  const [isProfessorSignedIn, setIsProfessorSignedIn] = useState('');
+  
   function refreshPage() {
       window.location.reload();
   }
@@ -25,8 +23,6 @@ export default function RecLetter() {
     (async () => {
         const rss = await authAPI.isStudentSignedIn();
         const rsp = await authAPI.isProfessorSignedIn();
-        setIsStudentSignedIn(rss);
-        setIsProfessorSignedIn(rsp);
         let ls;
         if (rss) {
           ls = await recLetterAPI.recLetterStudentShow()

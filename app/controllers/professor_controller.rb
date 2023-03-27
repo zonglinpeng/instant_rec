@@ -4,4 +4,7 @@ class ProfessorController < ApplicationController
 
   def index
   end
+
+  def get_current_professor
+    render json: current_professor
 end
