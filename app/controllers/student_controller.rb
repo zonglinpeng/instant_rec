@@ -24,4 +24,5 @@ class StudentController < ApplicationController
 
   def get_current_student
     render json: current_student
+  end
 end

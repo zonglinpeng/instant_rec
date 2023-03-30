@@ -14,8 +14,8 @@ import React from 'react';
 export default function Header() {
     const authAPI = api.auth()
     const [buttons, setButtons] = useState();
-    const [isStudentSignedIn, setIsStudentSignedIn] = useState('');
-    const [isProfessorSignedIn, setIsProfessorSignedIn] = useState('');
+    const [isStudentSignedIn, setIsStudentSignedIn] = useState<Boolean | null>(null);
+    const [isProfessorSignedIn, setIsProfessorSignedIn] = useState<Boolean | null>(null);
 
     useEffect(() => {
         (
@@ -24,30 +24,11 @@ export default function Header() {
                 const rsp = await authAPI.isProfessorSignedIn()
                 setIsStudentSignedIn(rss)
                 setIsProfessorSignedIn(rsp)
-                if (rss != '') {
-                    await authAPI.studentSignOut()
-                }
-                if (rsp != '') {
-                    await authAPI.professorSignOut()
-                }
             }
         )().then(renderComp)
         }, [authAPI])
 
     const renderComp = () => {
-        // (async () => {
-        //     const rss = await authAPI.isStudentSignedIn()
-        //     const rsp = await authAPI.isProfessorSignedIn()
-        //     setIsStudentSignedIn(rss)
-        //     setIsProfessorSignedIn(rsp)
-        //     if (rss != '') {
-        //         await authAPI.studentSignOut()
-        //     }
-        //     if (rsp != '') {
-        //         await authAPI.professorSignOut()
-        //     }
-        // }
-        // )().then(() => {
         if (isStudentSignedIn){
             return (
                 <div>
@@ -68,7 +49,6 @@ export default function Header() {
                 <div></div>
             );
         }
-    // })
     }
 
     return (
