@@ -22,6 +22,11 @@ const PreView = (prop: PreViewProps) => {
     }
 
     const lettersToPreviewList = (ls: RecLetter[]) => {
+        if (ls.length == 0) {
+            return <div
+            className='preview-entry d-flex align-items-start'
+            >No request at this time. Check back later.</div>
+        }
         return ls.map((l) => {
             return (
                 <Box sx={{ width: '100%' }} key={l.rec_letter_id}>

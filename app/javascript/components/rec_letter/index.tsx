@@ -15,7 +15,7 @@ export default function RecLetter() {
   const [curRecLetter, setCurRecLetter] = useState()
   const recLetterAPI = api.rec_letter()
   const authAPI = api.auth()
-  
+
   function refreshPage() {
       window.location.reload();
   }
@@ -31,10 +31,11 @@ export default function RecLetter() {
           ls = await recLetterAPI.recLetterProfessorShow()
         }
 
-        setRecLetters(ls);
-        if (ls === undefined || ls.length == 0) {
+        if (ls === undefined || ls === null || ls.length == 0) {
+          setRecLetters([]);
           setCurRecLetter(null);
         } else {
+          setRecLetters(ls);
           setCurRecLetter(ls[0].rec_letter_id);
         }
 
