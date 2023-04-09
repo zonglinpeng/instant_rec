@@ -1,0 +1,225 @@
+/* app/javascript/components/header/index.css */
+#header {
+  position: sticky;
+  top: 0;
+  align-items: center;
+  z-index: 10;
+}
+#home {
+  text-align: left;
+}
+.user-avatar {
+  margin-left: 20px;
+}
+
+/* app/javascript/components/footer/index.css */
+#footer {
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background-color: #fce7cd;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  align-items: center;
+  justify-content: space-between;
+  bottom: 0%;
+}
+#footer-copyright {
+  font-weight: lighter;
+  font-size: larger;
+}
+#footer-social-icons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+#footer-social-icons > a {
+  transition: all .2s linear;
+  background-color: #eceeef;
+  color: #818a91;
+  font-size: 16px;
+  line-height: 44px;
+  width: 44px;
+  height: 44px;
+  text-align: center;
+  margin-right: 8px;
+  border-radius: 100%;
+}
+#footer-social-icons > a.facebook:hover {
+  background-color: #3b5998;
+}
+#footer-social-icons > a.twitter:hover {
+  background-color: #00aced;
+}
+#footer-social-icons > a.linkedin:hover {
+  background-color: #007bb6;
+}
+#footer-social-icons > a.github:hover {
+  background-color: #ea4c89;
+}
+
+/* app/javascript/components/rec_letter/index.css */
+.d-flex {
+  display: flex !important;
+  flex-direction: column !important;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* app/javascript/components/rec_letter/split_pane/index.css */
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+.App {
+  font-family: "Segoe UI", sans-serif;
+  font-size: 1.2rem;
+  text-align: center;
+}
+.split-pane-col {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.split-pane-row {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+}
+.split-pane-top,
+.split-pane-bottom,
+.split-pane-right,
+.split-pane-left {
+  flex: 1;
+  overflow: hidden;
+}
+.split-pane-right {
+  background-color: #fff;
+  background-image: linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px), linear-gradient(#eee 0.1em, transparent 0.1em);
+  background-size: 100% 1.2em;
+}
+.split-pane-top,
+.split-pane-bottom {
+  background-color: #ccc;
+  text-align: left;
+  padding: 2%;
+}
+.separator-col {
+  border: 5px solid black;
+  cursor: col-resize;
+}
+.separator-row {
+  border: 5px solid black;
+  cursor: row-resize;
+}
+ul {
+  margin-left: -2%;
+}
+ul li {
+  margin: 1rem;
+  list-style-type: square;
+}
+ul a {
+  text-decoration: none;
+  color: darkblue;
+  font-size: large;
+}
+ul a:hover {
+  color: black;
+}
+blockquote {
+  border-left: 10px solid #ccc;
+  margin: 5.5em 0 0 0;
+  quotes: "\201c""\201d""\2018""\2019";
+  padding: 2rem 0 1rem;
+}
+blockquote:before {
+  color: #ccc;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+blockquote p {
+  display: inline;
+}
+.quote {
+  max-width: 60%;
+  text-align: right;
+  margin: auto;
+  font-style: italic;
+}
+.quote span {
+  font-weight: bold;
+}
+
+/* app/javascript/components/rec_letter/pre_view/index.css */
+.preview-entry {
+  flex: 1;
+  padding: 0 0 0 10px;
+  max-width: calc(100% - 24px);
+}
+.preview-wrapper {
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin: 0 0 4px;
+  position: relative;
+  cursor: pointer;
+  max-width: 290px;
+  margin-left: 12px;
+}
+.due-date {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.preview-content-wrap {
+  margin: 0 0 4px;
+}
+.preview-content {
+  padding: 0 15px 0 0;
+  flex: 1;
+}
+.preview-footer {
+  height: 14px;
+}
+.align-items-center {
+  align-items: center !important;
+}
+.d-flex {
+  display: flex !important;
+}
+.align-items-start {
+  align-items: flex-start !important;
+}
+.justify-content-between {
+  justify-content: space-between !important;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+.align-items-center {
+  align-items: center !important;
+}
+.justify-content-between {
+  justify-content: space-between !important;
+}
+
+/* app/javascript/components/rec_letter/post_view/index.css */
+
+/* app/javascript/components/request/professor_list/index.css */
+
+/* app/javascript/components/request/index.css */
+/*# sourceMappingURL=assets/application.css.map */
