@@ -10,8 +10,6 @@ class RecLetterProfessorController < RecLetterController
   # GET /rec_letter/1.json
   def show
     @rec_letter_professor = Professor.search_rec_letter(current_professor[:professor_id])
-    puts "*" * 100
-    puts current_professor[:professor_id]
     render json: @rec_letter_professor
   end
 

@@ -9,9 +9,7 @@ class Professor < ApplicationRecord
 
   class << self
     def search_rec_letter(id)
-      [].tap do |array|
-        array << RecLetter.find_by(professor_id_id: id)
-      end
+      RecLetter.where(professor_id_id: id)
     end
 
     private
