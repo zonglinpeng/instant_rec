@@ -143,7 +143,7 @@ export default function SignUp() {
                   control={<Checkbox
                     value="isProfessor"
                     color="primary"
-                    onChange={() => (setIsProfessor(true))}
+                    onChange={(event) => (event.target.checked)}
                   />}
                   label="I am a professor"
                   id="isProfessor"

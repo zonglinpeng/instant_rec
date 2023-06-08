@@ -87,7 +87,7 @@ export default function SignIn() {
                     <Checkbox
                         value="allowExtraEmails"
                         color="primary"
-                        onChange={() => (setIsProfessor(true))}
+                        onChange={(event) => (event.target.checked)}
                     />
                     }
                   label="I am a professor"
